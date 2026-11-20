@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>RED ROLL – Fushë Kosovë</title>
+<meta name="description" content="RED ROLL, fast-food me roll në Fushë Kosovë. Mad to Roll!">
+<meta property="og:title" content="RED ROLL – Mad to Roll">
+<meta property="og:description" content="Fast-food me roll në Fushë Kosovë.">
+<meta property="og:image" content="assets/mad.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap">
+<style>
+:root{--red:#E5242A;--deep:#B81720;--soft:#F7F7F7;--ink:#171717;--mute:#777;--bg:#fff;--surf:#F7F7F7;--line:#e4e4e4;--on:#171717;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121212;--surf:#1c1c1c;--line:#2e2e2e;--on:#f2f2f2;--mute:#a0a0a0}}
+:root[data-theme="dark"]{--bg:#121212;--surf:#1c1c1c;--line:#2e2e2e;--on:#f2f2f2;--mute:#a0a0a0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(72px + env(safe-area-inset-top,0px))}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--on);font:400 1rem/1.6 Inter,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:"Space Grotesk",system-ui,sans-serif;line-height:1;margin:0;letter-spacing:-.02em}
+img{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+section{padding:clamp(72px,10vw,140px) 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 28px;border-radius:4px;font:600 1rem Inter,sans-serif;text-decoration:none;border:2px solid var(--red);background:var(--red);color:#fff;cursor:pointer;transition:background .2s,color .2s}
+.btn:hover{background:var(--deep);border-color:var(--deep)}
+.btn.ghost{background:transparent;color:var(--on)}
+.btn.ghost:hover{background:var(--on);color:var(--bg);border-color:var(--on)}
+.btn.white{background:#fff;color:var(--red);border-color:#fff}
+.btn.white:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+/* preloader + progress */
+#pre,#pre2{position:fixed;inset:0;z-index:100;background:var(--red)}
+#pre2{z-index:99;background:var(--deep)}
+#pre .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;color:#fff;text-align:center}
+#pre img{width:min(220px,50vw)}
+#pre .tg{font:700 clamp(1rem,2.6vw,1.5rem) "Space Grotesk";letter-spacing:.02em}
+#pre .ct{position:absolute;left:clamp(20px,4vw,48px);bottom:16px;font:700 clamp(4rem,16vw,11rem)/1 "Space Grotesk";color:#fff;font-variant-numeric:tabular-nums}
+#cur{position:fixed;left:0;top:0;width:38px;height:38px;margin:-19px 0 0 -19px;border:2px solid var(--red);border-radius:50%;pointer-events:none;z-index:200;opacity:0;transition:background .25s,border-color .25s}
+#cur.on{opacity:1}#cur.big{background:rgba(229,36,42,.18)}
+.wd{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.1em;margin-bottom:-.1em}
+.wd>span{display:inline-block}
+#about{position:relative;overflow:hidden}
+.about{position:relative;z-index:1}
+.drw{position:absolute;right:-14%;top:50%;width:min(900px,100vw);transform:translateY(-50%);opacity:.16;pointer-events:none}
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--red);transform:scaleX(0);transform-origin:left;z-index:60}
+/* nav */
+nav{position:fixed;inset:0 0 auto 0;z-index:50;padding-top:env(safe-area-inset-top,0px);transition:background .3s,box-shadow .3s}
+nav.solid{background:var(--bg);box-shadow:0 1px 0 var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px;gap:16px}
+.brand img{height:50px;width:auto}
+.links{display:flex;align-items:center;gap:28px}
+.links a.l{text-decoration:none;font-weight:500;position:relative;padding:6px 0}
+.links a.l::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:100%;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.links a.l:hover::after,.links a.l.on::after{transform:scaleX(1)}
+.lang{display:flex;border:1.5px solid var(--line);border-radius:4px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--on);font:600 .8rem Inter;padding:8px 10px;cursor:pointer;min-width:40px;min-height:36px}
+.lang button[aria-pressed=true]{background:var(--on);color:var(--bg)}
+.burger{display:none;background:none;border:0;width:48px;height:48px;cursor:pointer;color:var(--on)}
+.burger i{display:block;width:24px;height:2px;background:currentColor;margin:6px auto;transition:transform .3s,opacity .3s}
+.burger[aria-expanded=true] i:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger[aria-expanded=true] i:nth-child(2){opacity:0}
+.burger[aria-expanded=true] i:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+@media(max-width:860px){
+.burger{display:block}
+.links{position:fixed;inset:0;background:var(--red);flex-direction:column;justify-content:center;align-items:flex-start;padding:0 32px;gap:14px;clip-path:circle(0 at calc(100% - 40px) 36px);transition:clip-path .55s cubic-bezier(.7,0,.2,1);visibility:hidden}
+.links.open{clip-path:circle(150% at calc(100% - 40px) 36px);visibility:visible}
+.links a.l{font:700 clamp(2.2rem,10vw,3.4rem)/1.1 "Space Grotesk";color:#fff}
+.links .btn{background:#fff;color:var(--red);border-color:#fff;margin-top:12px}
+.links .lang{border-color:#fff6}.links .lang button{color:#fff}.links .lang button[aria-pressed=true]{background:#fff;color:var(--red)}
+nav.menu-open .burger{position:relative;z-index:2;color:#fff}
+nav.menu-open .brand{position:relative;z-index:2}
+}
+/* hero */
+.hero{min-height:100svh;display:flex;align-items:center;padding:110px 0 64px;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:clamp(2.8rem,7vw,6.2rem);font-weight:700;text-transform:uppercase}
+.hero h1 .ln{display:block;overflow:hidden;padding-bottom:.06em}
+.hero h1 .ln>span{display:block}
+.hero h1 .r{color:var(--red)}
+.hero p.sub{font-size:1.2rem;max-width:30em;color:var(--mute);margin:28px 0 36px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.stage{position:relative;max-width:520px;width:100%;justify-self:center;perspective:1000px}
+.frame{background:var(--red);aspect-ratio:3/4;overflow:hidden;transform-style:preserve-3d;box-shadow:0 50px 70px -40px rgba(184,23,32,.7);position:relative}
+.frame img{width:100%;height:100%;object-fit:cover;transform:scale(1.08)}
+.spin{position:absolute;right:-12%;top:-8%;width:46%;z-index:2;pointer-events:none;filter:drop-shadow(0 12px 18px rgba(0,0,0,.25))}
+.price{position:absolute;left:-6%;bottom:8%;z-index:2;background:var(--ink);color:#fff;padding:14px 18px;font:700 1.1rem "Space Grotesk";max-width:60%}
+.price small{display:block;font:400 .75rem Inter;color:#ccc;margin-top:2px}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.stage{max-width:340px;order:-1}.hero{align-items:flex-start}.spin{right:-6%}}
+/* marquee */
+.mq{background:var(--red);color:#fff;overflow:hidden;white-space:nowrap;padding:18px 0;transform:rotate(-1.2deg);margin:0 -2vw}
+.mq .t{display:inline-flex;gap:40px;font:700 clamp(1.6rem,4vw,3rem) "Space Grotesk";text-transform:uppercase;will-change:transform}
+.mq .t span::after{content:"";display:inline-block;width:.5em;height:.5em;margin-left:40px;border:.12em solid #fff;border-radius:50%}
+/* menu */
+.head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:40px}
+h2{font-size:clamp(2rem,5vw,4rem);font-weight:700;text-transform:uppercase;max-width:14em}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px}
+.filters button{min-height:44px;padding:0 18px;border-radius:999px;border:1.5px solid var(--line);background:none;color:var(--on);font:500 .95rem Inter;cursor:pointer;transition:all .2s}
+.filters button:hover{border-color:var(--red)}
+.filters button[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:28px}
+.item[hidden]{display:none}
+.item .im{aspect-ratio:1;overflow:hidden;background:var(--red)}
+.item .im img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.2,.7,.2,1)}
+.item:hover .im img{transform:scale(1.08)}
+.item .b{padding:18px 0;display:flex;flex-direction:column;gap:6px;border-bottom:2px solid var(--on)}
+.item small{color:var(--red);font-weight:600}
+.item h3{font-size:1.5rem}
+.item p{margin:0;color:var(--mute);font-size:.95rem}
+.item .row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+.item .pr{font:700 1.1rem "Space Grotesk"}
+.item .pr.s{font:400 .85rem Inter;color:var(--mute)}
+.item a{font-weight:600;color:var(--red);text-decoration:none;padding:8px 0}
+.item a:hover{text-decoration:underline}
+/* expanding banner */
+.sig{background:var(--red);color:#fff;padding-bottom:0;overflow:hidden}
+.sig p{font-size:1.25rem;max-width:26em;margin:24px 0 48px}
+.bn{margin-top:20px;clip-path:inset(0 14% 0 14%);overflow:hidden}
+.bn img{width:100%;aspect-ratio:2/1;object-fit:cover;transform:scale(1.25)}
+/* about / why */
+.about{display:grid;grid-template-columns:1fr 1fr;gap:clamp(32px,6vw,96px);align-items:center}
+.about p{font-size:1.2rem;max-width:34em;margin:20px 0 0}
+.about .lg{width:min(360px,80%);justify-self:center}
+@media(max-width:860px){.about{grid-template-columns:1fr}}
+.why{background:var(--surf)}
+.pts{display:grid;grid-template-columns:repeat(3,1fr);border-top:3px solid var(--on);margin-top:40px}
+.pts div{padding:28px 28px 8px 0}
+.pts h3{font-size:1.6rem;margin-bottom:12px}
+.pts p{margin:0;color:var(--mute);max-width:22em}
+@media(max-width:860px){.pts{grid-template-columns:1fr}}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:clamp(130px,19vw,250px);gap:12px}
+.gal button{padding:0;border:0;background:var(--red);cursor:zoom-in;overflow:hidden;clip-path:inset(0)}
+.gal button img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.gal button:hover img{transform:scale(1.07)}
+.gal button:nth-child(1){grid-row:span 2}
+.gal button:nth-child(2){grid-column:span 2;grid-row:span 2}
+.gal button:nth-child(5){grid-column:span 2}
+@media(max-width:700px){.gal{grid-template-columns:repeat(2,1fr)}.gal button:nth-child(2){grid-column:span 2}}
+dialog{border:0;padding:0;background:none;max-width:min(92vw,900px);max-height:92vh}
+dialog::backdrop{background:rgba(0,0,0,.85)}
+dialog img{max-height:90vh;width:auto;margin:auto}
+dialog button{position:absolute;top:8px;right:8px;width:44px;height:44px;border:0;background:#fff;color:#111;font-size:1.5rem;cursor:pointer}
+/* contact */
+.contact{background:var(--ink);color:#fff}
+.contact .cols{display:grid;grid-template-columns:1.2fr 1fr;gap:clamp(32px,6vw,96px)}
+.contact dl{margin:0;display:grid;gap:22px}
+.contact dt{color:#aaa;font-size:.9rem}
+.contact dd{margin:2px 0 0;font:500 1.5rem/1.3 "Space Grotesk"}
+.contact dd small{display:block;font:400 .85rem Inter;color:#aaa;margin-top:4px}
+.contact h2{margin-bottom:28px}
+.contact .cta{margin-top:32px}
+.contact .btn.ghost{color:#fff;border-color:#fff6}
+.contact .btn.ghost:hover{background:#fff;color:var(--ink)}
+.soc{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+.soc a{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 18px;border:1.5px solid #fff4;text-decoration:none;font-weight:500;transition:background .2s,color .2s}
+.soc a:hover{background:#fff;color:var(--ink)}
+.soc svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2}
+@media(max-width:860px){.contact .cols{grid-template-columns:1fr}}
+footer{background:var(--ink);color:#999;padding:24px 0 calc(24px + env(safe-area-inset-bottom,0px));font-size:.85rem;border-top:1px solid #2a2a2a}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition-duration:.01ms!important;animation-duration:.01ms!important}.bn{clip-path:none}}
+</style>
+</head>
+<body>
+<div id="pre2" aria-hidden="true"></div><div id="pre" aria-hidden="true"><div class="in"><img src="assets/logo.png" alt=""><div class="tg">A taste that wraps you!</div></div><div class="ct" id="ct">0</div></div><div id="cur" aria-hidden="true"></div>
+<div id="bar"></div>
+<nav id="nav">
+ <div class="wrap">
+  <a class="brand" href="#home" aria-label="RED ROLL"><img src="assets/logo.png" alt="RED ROLL"></a>
+  <div class="links" id="links">
+   <a class="l on" href="#home" data-sq="Ballina" data-en="Home">Ballina</a>
+   <a class="l" href="#menu" data-sq="Menuja" data-en="Our Menu">Menuja</a>
+   <a class="l" href="#about" data-sq="Rreth nesh" data-en="About">Rreth nesh</a>
+   <a class="l" href="#contact" data-sq="Kontakti" data-en="Contact">Kontakti</a>
+   <div class="lang" role="group" aria-label="Gjuha / Language"><button data-l="sq" aria-pressed="true">SQ</button><button data-l="en" aria-pressed="false">EN</button></div>
+   <a class="btn mag order" href="tel:+38349799744" data-sq="Porosit tani" data-en="Order now">Porosit tani</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="links"><i></i><i></i><i></i></button>
+ </div>
+</nav>
+
+<main>
+<section class="hero" id="home">
+ <div class="wrap">
+  <div>
+   <h1 aria-label="Big flavour. Perfectly wrapped.">
+    <span class="ln"><span data-sq="Shije e madhe." data-en="Big flavour.">Shije e madhe.</span></span>
+    <span class="ln r"><span data-sq="E mbështjellë perfekt." data-en="Perfectly wrapped.">E mbështjellë perfekt.</span></span>
+   </h1>
+   <p class="sub" data-sq="Zbulo shijen që të mbështjell. Roll të freskëta e ngopëse për çdo dëshirë." data-en="Discover the taste that wraps you. Fresh, satisfying rolls made for every craving.">Zbulo shijen që të mbështjell. Roll të freskëta e ngopëse për çdo dëshirë.</p>
+   <div class="cta">
+    <a class="btn mag" href="#menu" data-sq="Eksploro menunë" data-en="Explore our menu">Eksploro menunë</a>
+    <a class="btn ghost mag order" href="tel:+38349799744" data-sq="Porosit tani" data-en="Order now">Porosit tani</a>
+   </div>
+  </div>
+  <div class="stage" id="stage">
+   <div class="frame" id="frame"><img src="assets/wrap.jpg" alt="Chicken Roll – RED ROLL" fetchpriority="high"></div>
+   <svg class="spin" id="spin" viewBox="0 0 200 200" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round" d="M100 100m0-6a6 6 0 1 1-6 6c0-14 12-24 26-24 22 0 38 18 38 40 0 28-24 50-52 50-36 0-62-30-62-66 0-44 34-78 78-78"/></svg>
+   <div class="price" id="pricetag"><span>Melt Sandwich 2.50 €</span><small data-sq="Produkt i ri" data-en="New product">Produkt i ri</small></div>
+  </div>
+ </div>
+</section>
+
+<div class="mq" aria-hidden="true"><div class="t" id="mq"></div></div>
+
+<section id="menu">
+ <div class="wrap">
+  <div class="head"><h2 data-sq="Menuja jonë" data-en="Our menu">Menuja jonë</h2>
+  <p style="max-width:24em;color:var(--mute);margin:0" data-sq="Çmimet shtohen sapo konfirmohen nga RED ROLL." data-en="Prices are added once confirmed by RED ROLL.">Çmimet shtohen sapo konfirmohen nga RED ROLL.</p></div>
+  <div class="filters" id="filters" role="group" aria-label="Kategoritë"></div>
+  <div class="grid" id="grid"></div>
+ </div>
+</section>
+
+<section class="sig">
+ <div class="wrap">
+  <h2 data-sq="Më shumë se një vakt. Është një Red Roll." data-en="More than a meal. It’s a Red Roll.">Më shumë se një vakt. Është një Red Roll.</h2>
+  <p data-sq="Shije e madhe, kombinime ngopëse dhe një shije për t’u kthyer sërish." data-en="Big flavour, satisfying combinations, and a taste worth coming back for.">Shije e madhe, kombinime ngopëse dhe një shije për t’u kthyer sërish.</p>
+ </div>
+ <div class="bn" id="bn"><img src="assets/banner.jpg" alt="Mad to Roll: roll, bowl, sandwich, patate dhe pije" loading="lazy"></div>
+</section>
+
+<section id="about">
+ <svg class="drw" viewBox="0 0 200 200" aria-hidden="true"><path fill="none" stroke="#E5242A" stroke-width="3" stroke-linecap="round" d="M100 100m0-6a6 6 0 1 1-6 6c0-14 12-24 26-24 22 0 38 18 38 40 0 28-24 50-52 50-36 0-62-30-62-66 0-44 34-78 78-78"/></svg>
+ <div class="wrap about">
+  <div>
+   <h2 data-sq="Shija që e bashkon gjithçka." data-en="The taste that brings it all together.">Shija që e bashkon gjithçka.</h2>
+   <p data-sq="RED ROLL është një destinacion fast-food në Fushë Kosovë, i përkushtuar te vaktet në stil roll. Një slogan, një ide: një shije që të mbështjell." data-en="RED ROLL is a fast-food destination in Fushë Kosovë, built around roll-style meals. One slogan, one idea: a taste that wraps you.">RED ROLL është një destinacion fast-food në Fushë Kosovë, i përkushtuar te vaktet në stil roll. Një slogan, një ide: një shije që të mbështjell.</p>
+  </div>
+  <img class="lg" src="assets/logo.png" alt="Logoja e RED ROLL" loading="lazy">
+ </div>
+</section>
+
+<section class="why">
+ <div class="wrap">
+  <h2 data-sq="Pse Red Roll" data-en="Why Red Roll">Pse Red Roll</h2>
+  <div class="pts">
+   <div><h3 data-sq="Përvoja Roll" data-en="The roll experience">Përvoja Roll</h3><p data-sq="Çdo vakt është i mbështjellë dhe i gatshëm për t’u shijuar." data-en="Every meal is wrapped and ready to enjoy.">Çdo vakt është i mbështjellë dhe i gatshëm për t’u shijuar.</p></div>
+   <div><h3 data-sq="Çysh ta don qefi" data-en="Your way">Çysh ta don qefi</h3><p data-sq="Roll, bowl, sandwich dhe kombinime: zgjidh çfarë të pëlqen." data-en="Rolls, bowls, sandwiches and combos: pick what you like.">Roll, bowl, sandwich dhe kombinime: zgjidh çfarë të pëlqen.</p></div>
+   <div><h3 data-sq="Porosi e lehtë" data-en="Easy ordering">Porosi e lehtë</h3><p data-sq="Na telefono dhe porosit drejtpërdrejt." data-en="Call us and order directly.">Na telefono dhe porosit drejtpërdrejt.</p></div>
+  </div>
+ </div>
+</section>
+
+<section id="gallery">
+ <div class="wrap">
+  <div class="head"><h2 data-sq="Galeria" data-en="Gallery">Galeria</h2></div>
+  <div class="gal" id="gal"></div>
+ </div>
+</section>
+
+<section class="contact" id="contact">
+ <div class="wrap cols">
+  <div>
+   <h2 data-sq="Porosit ose na vizito" data-en="Order or visit us">Porosit ose na vizito</h2>
+   <div class="cta">
+    <a class="btn mag" href="tel:+38349799744" data-sq="Thirr tani" data-en="Call now">Thirr tani</a>
+    <a class="btn ghost mag" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&amp;query=Abedin+Sogojeva+Fush%C3%AB+Kosov%C3%AB" data-sq="Merr drejtimet" data-en="Get directions">Merr drejtimet</a>
+   </div>
+   <div class="soc" id="soc"></div>
+  </div>
+  <dl>
+   <div><dt data-sq="Adresa" data-en="Address">Adresa</dt><dd>Abedin Sogojeva, Fushë Kosovë</dd></div>
+   <div><dt data-sq="Telefon" data-en="Phone">Telefon</dt><dd><a href="tel:+38349799744" style="text-decoration:none">+383 49 799 744</a></dd></div>
+   <div><dt data-sq="Orari" data-en="Opening hours">Orari</dt><dd>10:00 – 22:00</dd></div>
+  </dl>
+ </div>
+</section>
+</main>
+<footer><div class="wrap"><span>© RED ROLL, Fushë Kosovë</span><span data-sq="Mad to Roll!" data-en="Mad to Roll!">Mad to Roll!</span></div></footer>
+
+<dialog id="lb" aria-label="Foto"><img alt=""><button aria-label="Mbyll">×</button></dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+/* ====== EDITO KËTU ====== Vendos lidhjet reale (lëre "" nëse nuk ekziston) */
+var SOCIAL={instagram:"",facebook:"",tiktok:"",wolt:""};
+var ICON={instagram:'<svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/></svg>',facebook:'<svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8z"/></svg>',tiktok:'<svg viewBox="0 0 24 24"><path d="M14 3v12a3.5 3.5 0 1 1-3.5-3.5M14 3c.4 2.6 2 4.2 5 4.5"/></svg>',wolt:''};
+var NAME={instagram:"Instagram",facebook:"Facebook",tiktok:"TikTok",wolt:"Wolt"};
+
+var lang="sq",L=localStorage;
+try{lang=L.getItem("rr-lang")||"sq"}catch(e){}
+var rm=matchMedia("(prefers-reduced-motion:reduce)").matches;
+var $=function(i){return document.getElementById(i)};
+
+/* marquee */
+var mqt=$("mq"),w="";for(var i=0;i<12;i++)w+="<span>Mad to Roll</span><span>Red Roll</span>";mqt.innerHTML=w;
+
+/* menu */
+var cats=[["all","Të gjitha","All"],["roll","Chicken Roll","Chicken Roll"],["rice","Rice Roll","Rice Roll"],["sandwich","Sandwich","Sandwich"],["combo","Kombinime","Combos"]];
+var TBC=["Përshkrimi konfirmohet nga RED ROLL.","Description to be confirmed by RED ROLL."];
+var items=[
+{c:"roll",img:"assets/wrap.jpg",n:["Chicken Roll","Chicken Roll"],d:TBC,p:""},
+{c:"rice",img:"assets/bowls.jpg",n:["Rice Roll","Rice Roll"],d:TBC,p:""},
+{c:"sandwich",img:"assets/melt.jpg",n:["Melt Sandwich","Melt Sandwich"],d:["Produkt i ri. Opsione: përshutë, suxhuk, tuna, chicken.","New. Options: prosciutto, sucuk, tuna, chicken."],p:"2.50 €"},
+{c:"combo",img:"assets/banner.jpg",n:["Ushqim + pije","Food + drink combos"],d:TBC,p:""}];
+var f=$("filters"),g=$("grid");
+cats.forEach(function(c,i){var b=document.createElement("button");b.dataset.c=c[0];b.dataset.sq=c[1];b.dataset.en=c[2];b.setAttribute("aria-pressed",i==0);f.appendChild(b)});
+items.forEach(function(it){var c=cats.filter(function(x){return x[0]==it.c})[0];var d=document.createElement("article");d.className="item";d.dataset.c=it.c;
+d.innerHTML='<div class="im"><img src="'+it.img+'" alt="'+it.n[0]+'" loading="lazy"></div><div class="b"><small data-sq="'+c[1]+'" data-en="'+c[2]+'"></small><h3 data-sq="'+it.n[0]+'" data-en="'+it.n[1]+'"></h3><p data-sq="'+it.d[0]+'" data-en="'+it.d[1]+'"></p><div class="row">'+(it.p?'<span class="pr">'+it.p+'</span>':'<span class="pr s" data-sq="Çmimi së shpejti" data-en="Price coming soon"></span>')+'<a class="order" href="tel:+38349799744" data-sq="Porosit" data-en="Order"></a></div></div>';g.appendChild(d)});
+
+/* gallery + lightbox */
+var gl=[["assets/mad.jpg","Mad to Roll"],["assets/melt.jpg","Melt Sandwich"],["assets/bowls.jpg","Bowls"],["assets/genz.jpg","Roll"],["assets/wrap.jpg","Roll"]];
+var ga=$("gal"),lb=$("lb");
+gl.forEach(function(x){var b=document.createElement("button");b.innerHTML='<img src="'+x[0]+'" alt="'+x[1]+'" loading="lazy">';b.onclick=function(){lb.querySelector("img").src=x[0];lb.querySelector("img").alt=x[1];lb.showModal()};ga.appendChild(b)});
+lb.onclick=function(e){if(e.target==lb||e.target.tagName=="BUTTON")lb.close()};
+
+/* socials + wolt */
+var soc=$("soc");
+Object.keys(SOCIAL).forEach(function(k){if(!SOCIAL[k])return;var a=document.createElement("a");a.href=SOCIAL[k];a.target="_blank";a.rel="noopener";a.innerHTML=ICON[k]+"<span>"+NAME[k]+"</span>";soc.appendChild(a)});
+if(SOCIAL.wolt)document.querySelectorAll(".order").forEach(function(a){a.href=SOCIAL.wolt;a.target="_blank";a.rel="noopener"});
+
+/* i18n */
+function apply(){document.documentElement.lang=lang;
+document.querySelectorAll("[data-sq]").forEach(function(e){e.textContent=e.dataset[lang]});
+document.querySelectorAll(".lang button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.l==lang)});
+document.title="RED ROLL – Fushë Kosovë"}
+apply();
+document.querySelectorAll(".lang button").forEach(function(b){b.onclick=function(){lang=b.dataset.l;try{L.setItem("rr-lang",lang)}catch(e){}apply()}});
+
+/* nav */
+var nav=$("nav"),bg=$("burger"),lk=$("links");
+function setM(o){lk.classList.toggle("open",o);bg.setAttribute("aria-expanded",o);nav.classList.toggle("menu-open",o);document.body.style.overflow=o?"hidden":""}
+bg.onclick=function(){setM(!lk.classList.contains("open"))};
+lk.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){setM(false)})});
+addEventListener("keydown",function(e){if(e.key=="Escape")setM(false)});
+var secs=["home","menu","about","contact"].map($);
+function sc(){nav.classList.toggle("solid",scrollY>40);var y=scrollY+140,a=0;secs.forEach(function(s,i){if(s.offsetTop<=y)a=i});lk.querySelectorAll("a.l").forEach(function(x,i){x.classList.toggle("on",i==a)});
+$("bar").style.transform="scaleX("+(scrollY/Math.max(1,document.documentElement.scrollHeight-innerHeight))+")"}
+sc();addEventListener("scroll",sc,{passive:true});
+
+/* filter */
+var pre=$("pre");var pre2=$("pre2");setTimeout(function(){pre.style.display="none";pre2.style.display="none"},6000);
+f.onclick=function(e){var b=e.target.closest("button");if(!b)return;var cur=b.dataset.c;f.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed",x==b)});
+g.querySelectorAll(".item").forEach(function(i){i.hidden=!(cur=="all"||i.dataset.c==cur)});
+if(window.gsap&&!rm)gsap.fromTo(g.querySelectorAll(".item:not([hidden])"),{y:30,opacity:0},{y:0,opacity:1,duration:.55,stagger:.08,ease:"power3.out"})};
+
+/* ====== ANIMATION ====== */
+if(!window.gsap||rm){pre.style.display="none";pre2.style.display="none";return}
+gsap.registerPlugin(ScrollTrigger);
+function chars(el){var t=el.textContent;el.textContent="";t.split(" ").forEach(function(w,i,a){var ws=document.createElement("span");ws.style.cssText="display:inline-block;white-space:nowrap";w.split("").forEach(function(c){var s=document.createElement("span");s.className="ch";s.style.display="inline-block";s.textContent=c;ws.appendChild(s)});el.appendChild(ws);if(i<a.length-1)el.appendChild(document.createTextNode(" "))})}
+document.querySelectorAll(".hero h1 .ln>span").forEach(chars);
+document.querySelectorAll("h2").forEach(function(h){var t=h.textContent;h.setAttribute("aria-label",t);h.innerHTML=t.split(" ").map(function(w){return '<span class="wd" aria-hidden="true"><span>'+w+'</span></span>'}).join(" ");
+gsap.from(h.querySelectorAll(".wd>span"),{yPercent:115,duration:.9,stagger:.07,ease:"power4.out",scrollTrigger:{trigger:h,start:"top 88%"}})});
+
+/* intro */
+var cnt={v:0},ct=$("ct");
+var hero=gsap.timeline();
+hero.from(".hero h1 .ch",{yPercent:120,rotateX:-80,transformOrigin:"0 100%",duration:1,stagger:.02,ease:"power4.out"})
+ .from("#frame",{clipPath:"inset(100% 0 0 0)",duration:1.3,ease:"power4.out"},0)
+ .from("#frame img",{scale:1.7,duration:1.9,ease:"power3.out"},0)
+ .from(".hero .sub,.hero .cta",{y:24,opacity:0,duration:.8,stagger:.12,ease:"power3.out"},.7)
+ .from("#spin",{scale:0,rotate:-240,duration:1.3,ease:"back.out(1.5)"},.6)
+ .from("#pricetag",{x:-50,opacity:0,duration:.8,ease:"power3.out"},1)
+ .from("nav .wrap>*",{y:-20,opacity:0,duration:.7,stagger:.08},.7)
+ .add(function(){gsap.to("#spin",{rotate:"+=360",duration:18,repeat:-1,ease:"none"});gsap.to("#pricetag",{y:-10,duration:2.4,yoyo:true,repeat:-1,ease:"sine.inOut"});gsap.to("#frame",{y:-8,duration:3,yoyo:true,repeat:-1,ease:"sine.inOut"})});
+hero.pause();
+var tl=gsap.timeline();
+tl.from("#pre img",{scale:.3,rotate:-120,opacity:0,duration:1.1,ease:"back.out(1.6)"})
+ .from("#pre .tg",{y:20,opacity:0,duration:.6},.5)
+ .to(cnt,{v:100,duration:1.5,ease:"power2.inOut",onUpdate:function(){ct.textContent=Math.round(cnt.v)}},0)
+ .to("#pre .in",{opacity:0,y:-30,duration:.4,ease:"power2.in"},1.7)
+ .to("#pre .ct",{opacity:0,duration:.3},1.7)
+ .to("#pre",{yPercent:-100,duration:.9,ease:"power4.inOut"},2)
+ .to("#pre2",{yPercent:-100,duration:1,ease:"power4.inOut"},2.12)
+ .add(function(){hero.play()},2.5)
+ .set(["#pre","#pre2"],{display:"none"});
+gsap.to("#frame img",{yPercent:8,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+gsap.to(".hero h1",{yPercent:-12,ease:"none",scrollTrigger:{trigger:".hero",start:"top top",end:"bottom top",scrub:true}});
+
+/* marquee speed follows scroll */
+var mt=gsap.to(mqt,{xPercent:-50,duration:30,repeat:-1,ease:"none"});
+ScrollTrigger.create({onUpdate:function(s){var d=s.direction;gsap.to(mt,{timeScale:d*(1+Math.min(5,Math.abs(s.getVelocity())/400)),duration:.3,overwrite:true,onComplete:function(){gsap.to(mt,{timeScale:d,duration:1.2})}})}});
+
+/* reveals */
+gsap.from("#grid .item",{scrollTrigger:{trigger:"#grid",start:"top 85%"},y:60,opacity:0,duration:.9,stagger:.12,ease:"power3.out"});
+gsap.from("#grid .im",{scrollTrigger:{trigger:"#grid",start:"top 85%"},clipPath:"inset(0 0 100% 0)",duration:1.1,stagger:.12,ease:"power4.out"});
+gsap.from(".sig p",{scrollTrigger:{trigger:".sig",start:"top 75%"},y:40,opacity:0,duration:.9,ease:"power3.out"});
+gsap.to("#bn",{clipPath:"inset(0 0% 0 0%)",ease:"none",scrollTrigger:{trigger:"#bn",start:"top 90%",end:"top 20%",scrub:true}});
+gsap.to("#bn img",{scale:1,ease:"none",scrollTrigger:{trigger:"#bn",start:"top 90%",end:"bottom 40%",scrub:true}});
+gsap.from(".about p",{scrollTrigger:{trigger:".about",start:"top 80%"},y:40,opacity:0,duration:.8});
+gsap.from(".about .lg",{rotate:-25,scale:.6,opacity:0,scrollTrigger:{trigger:".about",start:"top 80%"},duration:1.2,ease:"back.out(1.5)"});
+var dp=document.querySelector(".drw path"),len=dp.getTotalLength();
+gsap.set(dp,{strokeDasharray:len,strokeDashoffset:len});
+gsap.to(dp,{strokeDashoffset:0,ease:"none",scrollTrigger:{trigger:"#about",start:"top 80%",end:"bottom 30%",scrub:true}});
+gsap.from(".pts div",{scrollTrigger:{trigger:".pts",start:"top 85%"},y:30,opacity:0,duration:.7,stagger:.12});
+gsap.from("#gal button",{scrollTrigger:{trigger:"#gal",start:"top 85%"},clipPath:"inset(100% 0 0 0)",duration:1.1,stagger:.12,ease:"power4.out"});
+gsap.utils.toArray("#gal img").forEach(function(im){gsap.fromTo(im,{yPercent:-6},{yPercent:6,ease:"none",scrollTrigger:{trigger:im,start:"top bottom",end:"bottom top",scrub:true}})});
+gsap.from(".contact .cta,.contact dl>div,.soc",{scrollTrigger:{trigger:".contact",start:"top 75%"},y:30,opacity:0,duration:.7,stagger:.1});
+
+/* desktop: 3D depth, tilt, magnetic, cursor */
+if(matchMedia("(hover:hover)").matches){
+var st=$("stage"),fr=$("frame"),rx=gsap.quickTo(fr,"rotationY",{duration:.6}),ry=gsap.quickTo(fr,"rotationX",{duration:.6}),
+sx=gsap.quickTo("#spin","x",{duration:.8}),sy=gsap.quickTo("#spin","y",{duration:.8}),px=gsap.quickTo("#pricetag","x",{duration:.8});
+gsap.set(fr,{transformPerspective:900});
+st.addEventListener("mousemove",function(e){var r=st.getBoundingClientRect(),X=(e.clientX-r.left)/r.width-.5,Y=(e.clientY-r.top)/r.height-.5;rx(X*14);ry(-Y*14);sx(X*50);sy(Y*50);px(-X*35)});
+st.addEventListener("mouseleave",function(){rx(0);ry(0);sx(0);sy(0);px(0)});
+document.querySelectorAll(".item .im").forEach(function(im){gsap.set(im,{transformPerspective:800});var a=gsap.quickTo(im,"rotationY",{duration:.5}),b=gsap.quickTo(im,"rotationX",{duration:.5});
+im.addEventListener("mousemove",function(e){var r=im.getBoundingClientRect();a(((e.clientX-r.left)/r.width-.5)*10);b(-((e.clientY-r.top)/r.height-.5)*10)});
+im.addEventListener("mouseleave",function(){a(0);b(0)})});
+document.querySelectorAll(".mag").forEach(function(b){var x=gsap.quickTo(b,"x",{duration:.4}),y=gsap.quickTo(b,"y",{duration:.4});
+b.addEventListener("mousemove",function(e){var r=b.getBoundingClientRect();x((e.clientX-r.left-r.width/2)*.2);y((e.clientY-r.top-r.height/2)*.3)});
+b.addEventListener("mouseleave",function(){x(0);y(0)})});
+var cu=$("cur"),cx=gsap.quickTo(cu,"x",{duration:.25}),cy=gsap.quickTo(cu,"y",{duration:.25});
+addEventListener("mousemove",function(e){cu.classList.add("on");cx(e.clientX);cy(e.clientY)});
+document.addEventListener("mouseover",function(e){cu.classList.toggle("big",!!e.target.closest("a,button,.item .im"))});
+}
+})();
+</script>
+</body>
+</html>
